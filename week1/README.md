@@ -13,9 +13,10 @@
 
 week1/\
 ├── app.py\
+├── .env\
 ├── services/\
 ├── requirements.txt\
-└── README.md\
+└── README.md
 
 ## Setup
 
