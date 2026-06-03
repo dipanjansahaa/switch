@@ -11,11 +11,11 @@
 
 ## Project Structure
 
-week1/
-├── app.py
-├── services/
-├── requirements.txt
-└── README.md
+week1/\
+├── app.py\
+├── services/\
+├── requirements.txt\
+└── README.md\
 
 ## Setup
 
