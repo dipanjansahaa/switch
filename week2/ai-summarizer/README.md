@@ -35,5 +35,5 @@ ai-summarizer/\
 ├── app.py\
 ├── .env\
 ├── requirements.txt\
-└── README.md\
+└── README.md
 
