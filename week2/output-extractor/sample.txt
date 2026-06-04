@@ -1,0 +1,9 @@
+Hi, I'm John Doe.
+
+I have worked with Python, Java and SQL.
+
+Experience: 4 years.
+
+Worked at Google.
+
+Email: john@gmail.com

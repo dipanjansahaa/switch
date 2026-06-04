@@ -1,0 +1,11 @@
+{
+    "name": "John Doe",
+    "email": "john@gmail.com",
+    "skills": [
+        "Python",
+        "Java",
+        "SQL"
+    ],
+    "experience_years": 4,
+    "company": "Google"
+}
