@@ -1,0 +1,85 @@
+{
+    "name": "Dipanjan Saha",
+    "email": "dipanjansaha2003@gmail.com",
+    "skills": [
+        "Python",
+        "C++",
+        "Java",
+        "SQL",
+        "JavaScript",
+        "HTML/CSS",
+        "SAP S/4HANA ABAP",
+        "Open SQL",
+        "Data Dictionary",
+        "ALV Reports",
+        "Smart/Adobe Forms",
+        "Enhancements",
+        "SAP BW/4HANA",
+        "REST APIs",
+        "Flask",
+        "MySQL",
+        "Firebase",
+        "Oracle Cloud Infrastructure (OCI)",
+        "Generative AI",
+        "LLMs",
+        "RAG",
+        "Vector Databases",
+        "Git",
+        "GitHub",
+        "Linux",
+        "VS Code",
+        "Eclipse",
+        "HANA Studio",
+        "Jupyter Notebook"
+    ],
+    "experience_years": 4,
+    "current_company": "Accenture",
+    "projects": [
+        {
+            "name": "Call Simulation for D2D Communication",
+            "description": "Designed and simulated a Device-to-Device (D2D) communication framework to reduce base-station (BS) dependency and improve energy efficiency in cellular/IoT networks.",
+            "technologies": [
+                "Python",
+                "RL",
+                "Simulation Modeling"
+            ],
+            "duration": "May 2025 – Dec 2025"
+        },
+        {
+            "name": "Emotion Echo: Multi-Modal Anxiety Detection System",
+            "description": "Built a multi-modal mental health monitoring system integrating facial emotion recognition, heart rate sensing, and psychological inputs.",
+            "technologies": [
+                "Python",
+                "CNN",
+                "Firebase",
+                "IoT"
+            ],
+            "duration": "Aug 2024 – Mar 2025"
+        },
+        {
+            "name": "House Price Prediction Web App",
+            "description": "Developed a scalable machine learning-based web application to predict housing prices using location, area, and room features.",
+            "technologies": [
+                "Python",
+                "Flask",
+                "Scikit-learn",
+                "HTML/CSS/JS"
+            ],
+            "duration": "Apr 2024 – Sep 2024"
+        }
+    ],
+    "certificates": [
+        {
+            "name": "OCI Generative AI Professional",
+            "year": "2027"
+        },
+        {
+            "name": "OCI Multicloud Architect",
+            "year": "2027"
+        },
+        {
+            "name": "OCI Data Science Professional",
+            "year": "2027"
+        }
+    ]
+}

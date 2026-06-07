@@ -1,11 +1,24 @@
 {
-    "name": "John Doe",
-    "email": "john@gmail.com",
+    "name": "Dipanjan Saha",
+    "email": "dipanjansaha2003@gmail.com",
     "skills": [
         "Python",
+        "C++",
         "Java",
-        "SQL"
+        "SQL",
+        "JavaScript",
+        "HTML/CSS"
     ],
     "experience_years": 4,
-    "company": "Google"
+    "current_company": "Accenture",
+    "projects": [
+        "Call Simulation for D2D Communication",
+        "Emotion Echo: Multi-Modal Anxiety Detection System",
+        "House Price Prediction Web App"
+    ],
+    "certificates": [
+        "OCI Generative AI Professional",
+        "OCI Multicloud Architect",
+        "OCI Data Science Professional"
+    ]
 }
