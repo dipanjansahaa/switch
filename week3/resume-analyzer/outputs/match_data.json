@@ -1,0 +1,14 @@
+{
+    "candidate_name": "Dipanjan Saha",
+    "match_score": 50.0,
+    "matched_skills": [
+        "rag",
+        "python",
+        "vector databases"
+    ],
+    "missing_skills": [
+        "docker",
+        "fastapi",
+        "langchain"
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "job_title": "LLM Engineer",
+    "required_skills": [
+        "Python",
+        "FastAPI",
+        "LangChain",
+        "Vector Databases",
+        "RAG",
+        "Docker"
+    ],
+    "preferred_skills": [
+        "AWS",
+        "Kubernetes"
+    ],
+    "responsibilities": [],
+    "education_requirements": [
+        "Bachelor's Degree"
+    ],
+    "experience_requirements": {
+        "minimum_years": 2.0,
+        "description": ""
+    }
+}

@@ -1,0 +1,23 @@
+We are looking for an LLM Engineer.
+
+Requirements:
+
+- Python
+- FastAPI
+- LangChain
+- Vector Databases
+- RAG
+- Docker
+
+Preferred:
+
+- AWS
+- Kubernetes
+
+Experience:
+
+2+ years
+
+Education:
+
+Bachelor's Degree

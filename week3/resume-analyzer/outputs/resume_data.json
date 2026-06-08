@@ -1,0 +1,71 @@
+{
+    "candidate_name": "Dipanjan Saha",
+    "email": "dipanjansaha2003@gmail.com",
+    "phone": "+91 93301 45250",
+    "skills": [
+        "Python",
+        "C++",
+        "Java",
+        "SQL",
+        "JavaScript",
+        "HTML/CSS",
+        "SAP S/4HANA ABAP",
+        "Open SQL",
+        "Data Dictionary",
+        "AL V Reports",
+        "Smart/Adobe Forms",
+        "Enhancements",
+        "SAP BW/4HANA",
+        "REST APIs",
+        "Flask",
+        "MySQL",
+        "Firebase",
+        "Oracle Cloud Infrastructure (OCI)",
+        "Generative AI",
+        "LLMs",
+        "RAG",
+        "Vector Databases",
+        "Git",
+        "GitHub",
+        "Linux",
+        "VS Code",
+        "Eclipse",
+        "HANA Studio",
+        "Jupyter Notebook"
+    ],
+    "projects": [
+        {
+            "project_name": "Call Simulation for D2D Communication",
+            "technologies": [
+                "Python",
+                "RL",
+                "Simulation Modeling"
+            ]
+        },
+        {
+            "project_name": "Emotion Echo: Multi-Modal Anxiety Detection System",
+            "technologies": [
+                "Python",
+                "CNN",
+                "Firebase",
+                "IoT"
+            ]
+        },
+        {
+            "project_name": "House Price Prediction Web App",
+            "technologies": [
+                "Python",
+                "Flask",
+                "Scikit-learn",
+                "HTML/CSS/JS"
+            ]
+        }
+    ],
+    "education": [
+        {
+            "institution": "B. P. Poddar Institute of Management & Technology",
+            "duration": "Aug 2021 – Jul 2025"
+        }
+    ],
+    "years_experience": 3.0
+}
