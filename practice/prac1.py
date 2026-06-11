@@ -101,4 +101,4 @@ with open(
     data3 = json.load(f)
 
 print(data3)
-print(type(data3))
+# print(type(data3))                              # dict

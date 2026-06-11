@@ -1,6 +1,6 @@
 {
     "name": "Dipanjan Saha",
-    "email": "+91 93301 45250|dipanjansaha2003@gmail.com|linkedin.com/in/dipanjansahaa|github.com/dipanjansahaa",
+    "email": "dipanjansaha2003@gmail.com",
     "skills": [
         "Python",
         "C++",
@@ -9,48 +9,51 @@
         "JavaScript",
         "HTML/CSS"
     ],
-    "experience_years": null,
+    "experience_years": 1,
     "current_company": "Accenture",
     "projects": [
         {
             "name": "Call Simulation for D2D Communication",
-            "technologies": [
+            "tech_stack": [
                 "Python",
                 "RL",
                 "Simulation Modeling"
-            ]
+            ],
+            "description": "Designed and simulated a Device-to-Device (D2D) communication framework"
         },
         {
             "name": "Emotion Echo: Multi-Modal Anxiety Detection System",
-            "technologies": [
+            "tech_stack": [
                 "Python",
                 "CNN",
                 "Firebase",
                 "IoT"
-            ]
+            ],
+            "description": "Built a multi-modal mental health monitoring system integrating facial emotion recognition, heart rate sensing, and psychological inputs."
         },
         {
             "name": "House Price Prediction Web App",
-            "technologies": [
+            "tech_stack": [
                 "Python",
                 "Flask",
                 "Scikit-learn",
                 "HTML/CSS/JSA"
-            ]
+            ],
+            "description": "Developed a scalable machine learning-based web application to predict housing prices using location, area, and room features."
         }
     ],
     "certificates": [
         {
             "name": "OCI Generative AI Professional",
-            "year": 2027
+            "issue_date": 2027
         },
         {
             "name": "OCI Multicloud Architect",
-            "year": 2027
+            "issue_date": 2027
         },
         {
             "name": "OCI Data Science Professional",
-            "year": 2027
+            "issue_date": 2027
         }
     ]
 }
