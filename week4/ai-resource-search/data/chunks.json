@@ -1,0 +1,322 @@
+[
+  {
+    "filename": "embeddings.md",
+    "chunk_id": 0,
+    "text": "# Vector Embeddings Documentation\n\nThis document details how our project handles **vector embeddings** for semantic search, document chunking, and similarity retrieval.\n\n---\n\n## 🛠️ Embedding Pipeline Overview\n\nWe transform raw unstructured data into high-dimensional numerical vectors to facilitate fast mathematical similarity searches.\n\n1. **Data Ingestion**: Collect text files, Markdown documentation, or API content.\n2. **Text Chunking**: Split text into small, context-aware segments using stru"
+  },
+  {
+    "filename": "embeddings.md",
+    "chunk_id": 1,
+    "text": "text into small, context-aware segments using structural boundaries.\n3. **Vector Generation**: Pass text chunks through an embedding model to extract numerical vectors.\n4. **Database Storage**: Save the vectors alongside original text metadata inside our vector store.\n\n---\n\n## 🤖 Supported Embedding Models\n\nDepending on your environment (Local vs. Cloud), you can configure one of the following models:\n\n### 1. Cloud-Based: OpenAI\n* **Default Model**: `text-embedding-3-small` or `text-embedding-3-l"
+  },
+  {
+    "filename": "embeddings.md",
+    "chunk_id": 2,
+    "text": "*: `text-embedding-3-small` or `text-embedding-3-large`\n* **Dimensions**: 1536 or 3072\n* **Best For**: High performance, zero local hardware requirements, and large production scale.\n\n### 2. Local/Open-Source: Hugging Face\n* **Default Model**: `sentence-transformers/all-MiniLM-L6-v2`\n* **Dimensions**: 384\n* **Best For**: Free local development, data privacy, and completely offline execution.\n\n---\n\n## 📐 Chunking Strategy\n\nTo maintain maximum semantic accuracy, text must be divided before it is se"
+  },
+  {
+    "filename": "embeddings.md",
+    "chunk_id": 3,
+    "text": "tic accuracy, text must be divided before it is sent to the embedding model:\n\n* **Strategy**: `RecursiveCharacterTextSplitter`\n* **Chunk Size**: `500` characters (ideal balance for capturing context phrases).\n* **Chunk Overlap**: `50` characters (prevents loss of data at chunk boundaries).\n\n---\n\n## 💻 Code Quickstart (Python)\n\nEnsure you have your environment variables set up in a `.env` file:\n```env\nOPENAI_API_KEY=your_api_key_here\n```\n\n### Installation\n```bash\npip install openai sentence-transf"
+  },
+  {
+    "filename": "embeddings.md",
+    "chunk_id": 4,
+    "text": "llation\n```bash\npip install openai sentence-transformers numpy\n```\n\n### Generating an Embedding\n```python\nimport os\nfrom openai import OpenAI\n\nclient = OpenAI(api_key=os.environ.get(\"OPENAI_API_KEY\"))\n\ndef get_embedding(text: str, model=\"text-embedding-3-small\"):\n    # Clean string input\n    text = text.replace(\"\\n\", \" \")\n    \n    # Request vector from API\n    response = client.embeddings.create(\n        input=[text], \n        model=model\n    )\n    return response.data[0].embedding\n\n# Example ru"
+  },
+  {
+    "filename": "embeddings.md",
+    "chunk_id": 5,
+    "text": "   return response.data[0].embedding\n\n# Example run\nvector = get_embedding(\"Vector embeddings power intelligent semantic search.\")\nprint(f\"Generated Vector. Total Dimensions: {len(vector)}\")\n```\n\n---\n\n## 🔍 Similarity Retrieval\n\nWe utilize **Cosine Similarity** to compare user queries with our stored embeddings:\n\n$$\\text{Cosine Similarity} = \\frac{A \\cdot B}{\\|A\\| \\|B\\|}$$\n\nResults are ranked from `1.0` (identical context) to `-1.0` (opposite context). A score threshold of `0.75+` is typically re"
+  },
+  {
+    "filename": "embeddings.md",
+    "chunk_id": 6,
+    "text": "ext). A score threshold of `0.75+` is typically required to consider a document relevant for RAG synthesis.\n\n---\n\n## 🛡️ Best Practices & Optimization\n\n* **Handle Rate Limits**: Always implement exponential backoff retry logic for cloud APIs to avoid 429 errors.\n* **Keep Text Clean**: Remove excessive whitespaces, HTML/Markdown boilerplate, and broken characters prior to chunking.\n* **Idempotent Upserts**: Ensure your pipeline tracks document IDs. Only generate new embeddings if the source file's"
+  },
+  {
+    "filename": "embeddings.md",
+    "chunk_id": 7,
+    "text": " Only generate new embeddings if the source file's cryptographic hash has changed.\n"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 0,
+    "text": "1. What is SAP? \nSAP (Systems, Applications, and Products in Data Processing) is an enterprise software platform used \nby organizations to manage and integrate core business processes such as finance, human resources, \nprocurement, manufacturing, supply chain, and sales within a single centralized system. \nInstead of separate disconnected tools, SAP provides a unified environment where all departments share \nreal-time data, improving operational efficiency, accuracy, and decision-making across t"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 1,
+    "text": "efficiency, accuracy, and decision-making across the organization. \nIt is primarily an ERP (Enterprise Resource Planning) system designed to handle large -scale \ntransactional workloads for medium to large enterprises. \n2. What is ABAP? \nABAP (Advanced Business Application Programming) is a high -level programming language \ndeveloped by SAP SE for building and customizing applications within the SAP ecosystem. \nIt is used to create reports, interfaces, forms, data conversions, enhancements, and "
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 2,
+    "text": "faces, forms, data conversions, enhancements, and workflows that \nsupport enterprise business processes. ABAP is tightly integrated with SAP’s database and application \nlayer, allowing developers to process large volumes of  transactional data reliably while maintaining \nsystem stability. \nIt is primarily an enterprise application language, optimized for scalability, security, and business logic \nrather than general-purpose software development. \n3. What are the different types of ABAP programs?"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 3,
+    "text": "\n3. What are the different types of ABAP programs? \nThe main types of ABAP programs are: \n• Report Programs: Executable programs used to read data from database tables, process it, and \ndisplay output (often as lists or ALV reports). \n• Module Pool Programs (Dialog Programs): Used to build interactive applications with screens, \nuser inputs, buttons, and navigation. Common in transactional workflows. \n• Function Groups: Containers for function modules that encapsulate reusable business logic and"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 4,
+    "text": "dules that encapsulate reusable business logic and \ncan be called from different programs. \n• Interface Programs: Used for data exchange between SAP and external systems (for example \nvia IDocs, BAPIs, RFC). \n• Forms (SAPscript / Smart Forms / Adobe Forms): Programs designed for formatted document \ngeneration such as invoices, purchase orders, and delivery notes. \n• Enhancements / Exits: Custom logic added to standard SAP behaviour without modifying the \noriginal code, allowing system customizat"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 5,
+    "text": "ing the \noriginal code, allowing system customization while remaining upgrade-safe. \n4. What is the SAP Data Dictionary? \nThe SAP Data Dictionary (DDIC) is a centralized repository in the SAP SE system that stores and \nmanages metadata — meaning the technical definitions of data used across the SAP environment. \nIt defines objects such as: \n• Database Tables: Database tables are physical structures that store application data in rows and \ncolumns. They form the foundation for data storage and re"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 6,
+    "text": ". They form the foundation for data storage and retrieval in SAP systems. \n• Views: Views are virtual tables created from one or more database tables without storing data \nthemselves. They simplify data access and present information in a specific logical format. \n• Indexes: Indexes are performance optimization tools that speed up data retrieval from database \ntables. They reduce the time required to search for records by creating efficient lookup paths. \n• Data Elements: Data elements define th"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 7,
+    "text": "p paths. \n• Data Elements: Data elements define the semantic meaning of a field, such as its label and \ndescription. They act as reusable metadata that ensures consistency across tables and programs. \n• Domains: Domains define the technical properties of a field, including data type, length, and \nvalid value ranges. They enforce data integrity by restricting what can be entered. \n• Structures: Structures are data objects that group multiple fields together without storing data \nin the database. "
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 8,
+    "text": "s together without storing data \nin the database. They are mainly used for temporary data handling and program logic. \n• Search Helps: Search helps provide possible input values to users through an F4 help feature. \nThey improve accuracy and usability during data entry. \n• Lock Objects: Lock objects are used to prevent multiple users from modifying the same data \nsimultaneously. They help maintain data consistency and avoid transaction conflicts. \nThe Data Dictionary ensures data consistency, in"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 9,
+    "text": " \nThe Data Dictionary ensures data consistency, integrity, and reuse by allowing these definitions to be \ncreated once and referenced throughout multiple programs and modules. It also enables centralized \ncontrol over how data is stored, validated, and accessed within the system. \n5. What are transaction codes in SAP? \nSAP transaction codes (T-codes) are short alphanumeric shortcuts that directly execute specific tasks, \nprograms, or menus, bypassing complex menu navigation. They are essential f"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 10,
+    "text": "sing complex menu navigation. They are essential for efficiency across SAP \nmodules (e.g., V A01 for sales orders, ME21N for purchase orders), enabling quick access to screens \nlike SE38 for ABAP or BP for business partners. \n6. Important t-codes in SAP. \nCategory T-Code Purpose \nABAP \nDevelopment \nSE38 Create, edit, and execute ABAP reports \nABAP \nDevelopment \nSA38 Execute existing programs directly \nABAP \nDevelopment \nSE80 Object Navigator for full development (programs, classes, \nFMs) \nFuncti"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 11,
+    "text": "full development (programs, classes, \nFMs) \nFunction Modules SE37 Create, test, and manage function modules \nOOABAP SE24 Class Builder for object-oriented development \nData Dictionary SE11 Create/manage tables, views, domains, data elements, \nstructures, lock objects \nData Dictionary SE12 Display dictionary objects (read-only) \nTable Data SE16 Display table contents \nTable Data SE16N Advanced table display with better usability \nDatabase Utility SE14 Adjust database objects and manage table acti"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 12,
+    "text": "SE14 Adjust database objects and manage table activation \nLock Monitoring SM12 View and manage active data locks \nTransport \nRequests \nSE09 Workbench transport organizer \nTransport \nRequests \nSE10 Customizing transport organizer \nDebugging /H Activate debugger while running a program \nPerformance SE30 Runtime analysis for performance checks \nPerformance SAT Advanced runtime analysis tool \nCode Quality SCI Run Code Inspector for static code checks \nSmart Forms SMARTFORMS Design and maintain smart"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 13,
+    "text": " \nSmart Forms SMARTFORMS Design and maintain smart forms \nBADI SE18 Define Business Add-Ins \nBADI SE19 Implement Business Add-Ins \nEnhancements SMOD Find customer exits \nEnhancements CMOD Implement customer exits \nSystem Errors ST22 Analyze runtime dumps \nAuthorization SU53 Check authorization failures \nBackground Jobs SM37 Monitor scheduled/background jobs \nSQL Trace ST05 Trace database queries for performance analysis \n7. What is R/3 Architecture in SAP? \nSAP R/3 Architecture is a three-tier c"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 14,
+    "text": "re in SAP? \nSAP R/3 Architecture is a three-tier client-server architecture designed to separate responsibilities for \nbetter scalability, performance, and system management. \n• Presentation Layer: This is the user interface where end users interact with SAP through SAP \nGUI or web interfaces. It handles input and displays output but does not process business logic. \n• Application Layer: The application server processes business logic, executes ABAP programs, \nand manages communication between t"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 15,
+    "text": "BAP programs, \nand manages communication between the presentation and database layers. It is the core \nprocessing engine of the SAP system. \n• Database Layer : This layer stores all system data, including business transactions and \nconfiguration information. It ensures data consistency, security, and efficient retrieval. \n8. What is BDC programming? \nBDC (Batch Data Communication) is a technique in SAP SE systems used to transfer large volumes of \ndata into SAP by automatically executing standar"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 16,
+    "text": " \ndata into SAP by automatically executing standard transactions. \nIt works by simulating user input — entering data into screens and fields exactly as a user would — but \nin a controlled, automated batch process. \nKey characteristics: \n• Used for mass data migration or uploads \n• Follows existing transaction screens \n• Does not require creating new database logic \n• Helps maintain data integrity by leveraging standard validations \nTwo Main Methods: \n• Session Method: Data is processed in batche"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 17,
+    "text": "ds: \n• Session Method: Data is processed in batches; safer and suitable for large datasets. \n• Call Transaction Method: Executes transactions immediately; faster but less robust for error \nhandling. \n9. What is a transparent table? \nA transparent table is a database table in SAP where the table definition in the Data Dictionary matches \nexactly with a single physical table in the underlying database. \nKey characteristics: \n• Has a one-to-one relationship with the database table \n• Stores applica"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 18,
+    "text": "tionship with the database table \n• Stores application data permanently \n• Uses fields and data types defined in the Data Dictionary \n• Can be accessed directly using Open SQL \n• It is the most commonly used table type for storing business data in SAP systems. \n10. What is an internal table? \nAn internal table is a temporary, in -memory data structure in ABAP used to store and manipulate \nmultiple rows of data during program execution. \nKey characteristics: \n• Exists only while the program is ru"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 19,
+    "text": "cteristics: \n• Exists only while the program is running \n• Stored in application server memory, not in the database \n• Used for processing data such as query results before displaying or modifying it \n• Can be searched, sorted, looped over, and updated dynamically \n• It functions similarly to an array or collection but is designed to handle structured datasets \nefficiently within ABAP programs. \n11. What is a work area? \nA work area in ABAP is a single-row memory structure used to temporarily ho"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 20,
+    "text": "single-row memory structure used to temporarily hold data while processing \nrecords from a database table or an internal table. \nIt acts like a placeholder for one record at a time, allowing you to read, modify, or transfer data before \nwriting it back or moving to the next record. Work areas are commonly used with statements like \nSELECT, READ TABLE, and LOOP AT to process data sequentially. \n12. What is a report in ABAP? \nA report in ABAP is an executable program designed to retrieve data from"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 21,
+    "text": " executable program designed to retrieve data from the SAP database, process it \naccording to business logic, and present the output to the user — typically in a structured list or table \nformat. \nReports are commonly used for tasks like data analysis, business monitoring, and generating summaries, \nand they usually run based on user input provided through a selection screen. \n13. What is a parameter vs select-option? \nParameter: A parameter is a single input field on the selection screen that a"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 22,
+    "text": " single input field on the selection screen that accepts only one value. It is \ntypically used when the program needs a specific, fixed input (for example, one company code or one \ndate). \nSelect-Option: A select-option allows multiple values and ranges. Users can include or exclude values, \ndefine intervals (e.g., 1000–2000), and create complex selection criteria. It is internally stored as a table \nwith fields like SIGN, OPTION, LOW, and HIGH. \n14. What is a domain and a data element? \nDomain:"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 23,
+    "text": "\n14. What is a domain and a data element? \nDomain: A domain defines the technical attributes of a field in the SAP Data Dictionary — such as data \ntype, length, number of decimal places, and possible value range. It ensures consistency by enforcing \nuniform technical settings wherever it is used. \nData Element:  A data element provides the semantic meaning of a field. It contains field labels, \ndescriptions, and documentation that explain what the data represents from a business perspective. \n15"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 24,
+    "text": "e data represents from a business perspective. \n15. What is the difference between START-OF-SELECTION and INITIALIZATION? \nINITIALIZATION: \n• Triggered when the program loads, before the selection screen is displayed. \n• Mainly used to set default values, prefill parameters, or initialize variables. \nSTART-OF-SELECTION: \n• Triggered after the user executes the program (for example, presses F8). \n• This is where the main processing logic typically runs — such as fetching data from the \ndatabase a"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 25,
+    "text": " runs — such as fetching data from the \ndatabase and generating output. \n16. What is a view in the Data Dictionary? \nA view in the SAP Data Dictionary is a virtual table that does not store data itself but derives its data \nfrom one or more underlying database tables. It is used to combine, restrict, or present data in a specific \nlogical format without duplicating it physically in the database, helping improve data access, security, \nand abstraction. Common purposes include simplifying complex "
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 26,
+    "text": "tion. Common purposes include simplifying complex queries, controlling data visibility, and \nproviding a consistent interface for application programs. \n17. Types of views in SAP? \n• Database View: A database view is created by joining one or more tables using inner joins and \nis stored at the database level. It does not hold data itself but fetches it dynamically from \nunderlying tables. It is mainly used for read-only data retrieval and complex selections. \n• Projection View: A projection view"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 27,
+    "text": " selections. \n• Projection View: A projection view is built on a single table and exposes only selected fields. It \nhelps restrict unnecessary data access and simplifies data handling. It is often used to improve \nsecurity and reduce interface complexity. \n• Maintenance View : A maintenance view allows users to display and maintain data from \nmultiple related tables through a single interface. It is commonly used with table maintenance \ngenerators for administrative tasks. This helps ensure data"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 28,
+    "text": "s for administrative tasks. This helps ensure data consistency while simplifying \nupdates. \n• Help View: A help view is designed to provide search help (F4 help) by combining fields from \nrelated tables. It enables users to find valid input values quickly and accurately. It improves \nusability by guiding users during data entry. \n18. What is a selection screen? \nA selection screen in ABAP is the initial input interface of a report where users enter criteria before the \nprogram executes. It allow"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 29,
+    "text": "er criteria before the \nprogram executes. It allows users to filter and control the data that will be retrieved by providing inputs \nsuch as parameters and select-options, ensuring the report processes only the relevant dataset instead of \nscanning entire tables. \n19. What is modularization in ABAP? \nModularization in ABAP is the practice of breaking a large program into smaller, independent, and \nreusable units to improve readability, maintainability, debugging, and overall program structure. \n"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 30,
+    "text": "ility, debugging, and overall program structure. \nCommon modularization techniques in ABAP include: \n• Subroutines (FORM routines) — reusable code blocks within the same program. \n• Function Modules — globally reusable procedures that can be called from different programs. \n• Methods — functions defined inside classes as part of ABAP Objects. \n• Include Programs — used to split large programs into multiple files for better organization. \n20. What are function modules? \nFunction modules are reusa"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 31,
+    "text": " are function modules? \nFunction modules are reusable, pre-defined procedures in ABAP that encapsulate specific functionality \nand can be called from different programs. They are created inside a function group, have a well-defined \ninterface (import, export, changing parameters, and tables), and are commonly used to promote modular \nprogramming, reduce code duplication, and ensure consistent business logic across the system. \n21. What are subroutines? \nSubroutines in ABAP are reusable blocks of"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 32,
+    "text": "tines? \nSubroutines in ABAP are reusable blocks of code defined within a program using FORM and \nENDFORM. They are called with the PERFORM statement and are mainly used to break large \nprograms into smaller, manageable, and modular sections.  Unlike function modules, subroutines are \ntypically local to the program in which they are defined and are not designed for cross-program reuse. \n22. What is macro? \nA macro in ABAP is a reusable block of code defined using the DEFINE and END-OF-DEFINITION "
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 33,
+    "text": "de defined using the DEFINE and END-OF-DEFINITION \nstatements. Once defined, it can be invoked multiple times within the program to execute the same set \nof statements, helping reduce repetitive code. Macros are expanded directly at compile time, meaning \nthe code is inserted wherever the macro is called rather than executed as a separate procedure. \n23. What is smart forms? \nSmart Forms is a form-building tool in SAP used to design and generate structured business documents \nsuch as invoices, p"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 34,
+    "text": "structured business documents \nsuch as invoices, purchase orders, delivery notes, and payment advices. It provides a graphical interface \nto define layout, text, tables, logos, and formatting, and it automatically generates the underlying \nfunction module required to print or send the document, reducing the need for complex manual coding \ncompared to older tools like SAPscript. \n24. What is ALV? \nALV (ABAP List Viewer) is a standard SAP tool used to display structured and interactive reports in "
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 35,
+    "text": " to display structured and interactive reports in a \ntabular format.  It provides built -in features such as sorting, filtering, column reordering, totals, \nsubtotals, exporting to Excel, and layout customization, allowing developers to create user -friendly \nreports without building these functionalities from scratch. \n25. What are the types of ALV reports? \n• Classical ALV: Generated using function modules (like REUSE_ALV_LIST_DISPLAY). \nDisplays data in a simple list format with basic interac"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 36,
+    "text": "ys data in a simple list format with basic interactive features. \n• Grid ALV: Uses the ALV Grid Control (CL_GUI_ALV_GRID) to present data in a more \ninteractive table with features like editable cells, drag -and-drop columns, and better layout \ncontrol. \n• Object-Oriented (OO) ALV: Built using classes such as CL_SALV_TABLE. It follows object-\noriented principles, requires less code, and is commonly preferred in modern ABAP \ndevelopment. \n26. What is BAPI? \nBAPI (Business Application Programming "
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 37,
+    "text": " is BAPI? \nBAPI (Business Application Programming Interface) is a standardized programming interface provided \nby SAP SE that allows external systems or custom applications to interact with SAP business objects \nsafely and consistently.  BAPIs are pre -built function modules designed for tasks like creating sales \norders, updating customer data, or posting financial transactions, ensuring data integrity while enabling \nintegration between SAP and non-SAP systems. \n27. What are enhancements in SA"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 38,
+    "text": " non-SAP systems. \n27. What are enhancements in SAP? \nEnhancements in SAP are techniques that allow developers to extend or customize standard SAP \nfunctionality without modifying the original source code.  They are used when businesses need \nadditional logic or features while still keeping the core system upgrade -safe, since the standard SAP \ncode remains untouched. \nCommon enhancement types include: \n• User Exits — predefined hooks where custom code can be inserted. \n• Customer Exits — functi"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 39,
+    "text": "m code can be inserted. \n• Customer Exits — function module–based exits provided by SAP for extensions. \n• BADIs (Business Add -Ins) — object-oriented enhancement spots that support multiple \nimplementations. \n• Enhancement Framework — a modern approach that includes explicit enhancement points and \nsections for injecting custom logic. \n28. What is a user exit? \nA user exit is a predefined enhancement point in standard SAP programs where developers can insert \ncustom logic without modifying the "
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 40,
+    "text": "rs can insert \ncustom logic without modifying the original code. It typically involves adding code in specific includes \nprovided by SAP, allowing organizations to tailor standard processes to their business requirements \nwhile keeping the system upgrade-safe. \n29. What is a BADI? \nBADI (Business Add-In) is an object-oriented enhancement technique in SAP that allows developers to \nadd custom functionality to standard SAP applications without modifying the original code. It is based \non ABAP Obje"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 41,
+    "text": "fying the original code. It is based \non ABAP Objects, uses interfaces and classes, and supports multiple implementations, making it more \nflexible and scalable than older enhancement methods like user exits while remaining upgrade-safe. \n30. What is a lock object? \nA lock object in ABAP is a mechanism used to control concurrent data access by preventing multiple \nusers from modifying the same data at the same time.  When a record is locked, other users can only \ndisplay it but cannot make chang"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 42,
+    "text": "r users can only \ndisplay it but cannot make changes until the lock is released, ensuring data consistency and avoiding \nconflicts during database transactions. \n31. What is a transport request? \nA transport request in SAP is a mechanism used to move development objects — such as programs, \ntables, configurations, or enhancements — from one system to another within the landscape (typically \nDevelopment → Quality → Production).  It acts as a change management tool that records what was \nmodified,"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 43,
+    "text": "e management tool that records what was \nmodified, who made the change, and ensures the objects are transferred in a controlled and trackable \nway, helping maintain system stability and version consistency across environments. \n32. What is debugging in ABAP? \nDebugging in ABAP is the process of analyzing and executing a program step by step to identify and \nfix errors in the code. It is done using the ABAP Debugger, which allows developers to: \n• Pause program execution at breakpoints \n• Monitor"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 44,
+    "text": " Pause program execution at breakpoints \n• Monitor variable values in real time \n• Trace program flow \n• Modify data during execution for testing \n• Identify logical or runtime errors \n33. What is normalization in SAP tables? \nNormalization in SAP tables is the process of organizing data into structured tables to reduce \nredundancy, improve data integrity, and ensure efficient storage. It involves splitting large datasets into \nrelated tables and linking them using keys (such as primary and fore"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 45,
+    "text": " linking them using keys (such as primary and foreign keys), so each piece of \ninformation is stored only once. This minimizes inconsistencies and makes updates more reliable across \nthe system. \n34. What is code inspector? \nCode Inspector in ABAP is a static code analysis tool used to check programs for potential issues related \nto performance, security, syntax, and adherence to development standards.  It scans the source code \nwithout executing it and helps developers identify problems such as"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 46,
+    "text": " it and helps developers identify problems such as inefficient database operations, \nunused variables, naming violations, and other quality risks, ensuring more reliable and optimized \napplications before transport or deployment. \n35. What is OOABAP? \nOOABAP (Object-Oriented ABAP) is the object -oriented programming model of ABAP that allows \ndevelopers to build applications using classes and objects instead of relying only on procedural code. \nIt supports core OOP principles such as: \n• Encapsu"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 47,
+    "text": "t supports core OOP principles such as: \n• Encapsulation — bundling data and methods within a class \n• Inheritance — creating new classes from existing ones to reuse logic \n• Polymorphism — allowing the same method to behave differently based on the object \nOOABAP improves code reusability, scalability, maintainability, and aligns ABAP with modern \nsoftware development practices. \n36. Why did you choose SAP ABAP? \nI chose SAP ABAP because it powers critical enterprise systems used by large organ"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 48,
+    "text": "rs critical enterprise systems used by large organizations worldwide, \ngiving me exposure to real business processes rather than just theoretical development. It offers the \nopportunity to build strong expertise in enterprise application development while working on high -\nvolume, mission-critical data. Early in my career, my priority is to develop deep technical skills in a \nstable and widely adopted platform. \n37. What have you learned so far in ABAP? \nSince I recently started working with ABA"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 49,
+    "text": "n ABAP? \nSince I recently started working with ABAP, I have focused on building a strong foundation by \nunderstanding the SAP architecture, Data Dictionary, and basic programming concepts. I’ve learned \nabout internal tables, work areas, reports, selection screens, a nd Open SQL for database operations. \nCurrently, I’m concentrating on strengthening these fundamentals so I can contribute effectively once \nassigned to a project. \n38. Are you comfortable building a career in SAP? \nYes, I’m comfort"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 50,
+    "text": "rtable building a career in SAP? \nYes, I’m comfortable building a career in SAP because it supports mission-critical business operations \nfor organizations globally, making it a highly relevant and stable technology. My current focus is on \ndeveloping strong enterprise-level programming skills and understanding large-scale business systems. \nI believe gaining deep expertise in SAP will position me well for long-term technical growth. \n39. What do you know about how SAP is used in businesses? \nSA"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 51,
+    "text": " you know about how SAP is used in businesses? \nSAP is used by businesses as an ERP platform to integrate and manage core processes such as finance, \nsupply chain, procurement, sales, and human resources within a single system. This centralized \napproach enables real -time data flow across departments, imp roving operational efficiency and \ndecision-making. It also helps organizations standardize processes, maintain data accuracy, and scale \noperations effectively. \n40. What resources are you us"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 52,
+    "text": "ations effectively. \n40. What resources are you using to learn ABAP? \nI’m learning ABAP through a combination of structured training and hands -on practice in the SAP \nsystem. I regularly refer to SAP documentation and internal learning materials to understand concepts \ncorrectly, and I reinforce that by experimenting with small programs and examples. This approach helps \nme build both conceptual clarity and practical confidence. \n41. What if we put you in another domain? Are you comfortable wit"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 53,
+    "text": "put you in another domain? Are you comfortable with it? \nYes, I’m comfortable working in another domain because early in my career my priority is to build \nstrong technical fundamentals and adapt to business requirements. While I’ve started with ABAP, my \ncore strength is the ability to learn quickly and become pr oductive in whichever technology the \norganization needs. I see domain changes as an opportunity to expand my skill set rather than a \nlimitation. \n"
+  },
+  {
+    "filename": "question_sap_abap.pdf",
+    "chunk_id": 54,
+    "text": "\nlimitation. \n"
+  },
+  {
+    "filename": "rag.txt",
+    "chunk_id": 0,
+    "text": "Retrieval-Augmented Generation combines retrieval\nwith large language models."
+  }
+]
