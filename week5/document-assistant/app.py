@@ -1,20 +1,11 @@
 from src.ingest import DocumentLoader
 from src.chunk import TextChunker
+from src.embed import EmbeddingGenerator
+import json
 
 
 loader = DocumentLoader("data/docs")
-
 documents = loader.load_documents()
-
-print("=" * 60)
-print("Documents Loaded")
-print("=" * 60)
-
-for document in documents:
-    print(document["filename"])
-
-print()
-
 
 chunker = TextChunker(
     chunk_size=500,
@@ -23,15 +14,41 @@ chunker = TextChunker(
 
 chunks = chunker.create_chunks(documents)
 
+with open(
+    "data/chunks.json",
+    "w",
+    encoding="utf-8"
+) as f:
+
+    json.dump(
+        chunks,
+        f,
+        indent=2,
+        ensure_ascii=False
+    )
+
+embedder = EmbeddingGenerator()
+
+embeddings = embedder.generate_embeddings(chunks)
 
 print("=" * 60)
-print(f"Total Chunks: {len(chunks)}")
+print("Embedding Shape")
 print("=" * 60)
 
+print(embeddings.shape)
 
-for chunk in chunks[:13]:
+print()
 
-    print(f"File      : {chunk['filename']}")
-    print(f"Chunk ID  : {chunk['chunk_id']}")
-    print(chunk["text"][:150])
-    print("-" * 60)
+print("=" * 60)
+print("First Chunk")
+print("=" * 60)
+
+print(chunks[0]["text"][:200])
+
+print()
+
+print("=" * 60)
+print("First Embedding")
+print("=" * 60)
+
+print(embeddings[0][:10])
