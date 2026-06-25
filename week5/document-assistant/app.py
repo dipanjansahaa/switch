@@ -1,6 +1,7 @@
 from src.ingest import DocumentLoader
 from src.chunk import TextChunker
 from src.embed import EmbeddingGenerator
+from src.indexer import VectorIndexer
 import json
 
 
@@ -31,24 +32,24 @@ embedder = EmbeddingGenerator()
 
 embeddings = embedder.generate_embeddings(chunks)
 
-print("=" * 60)
-print("Embedding Shape")
-print("=" * 60)
 
-print(embeddings.shape)
+indexer = VectorIndexer()
+
+index = indexer.create_index(embeddings)
+
+
+
+indexer.save_index()
+
+indexer.save_chunks(chunks)
+
+
+print("=" * 60)
+print("FAISS index created")
+print("=" * 60)
 
 print()
 
-print("=" * 60)
-print("First Chunk")
-print("=" * 60)
+print(f"Vectors stored : {index.ntotal}")
 
-print(chunks[0]["text"][:200])
-
-print()
-
-print("=" * 60)
-print("First Embedding")
-print("=" * 60)
-
-print(embeddings[0][:10])
+print(f"Chunks stored  : {len(chunks)}")
