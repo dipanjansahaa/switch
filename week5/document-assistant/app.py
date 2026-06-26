@@ -3,6 +3,8 @@ from src.chunk import TextChunker
 from src.embed import EmbeddingGenerator
 from src.indexer import VectorIndexer
 from src.retriever import Retriever
+from src.llm import LLM
+from src.rag import RAGPipeline
 import json
 
 
@@ -62,24 +64,34 @@ retriever = Retriever(
 )
 
 
+# Add LLM and RAG
+llm = LLM()
+
+rag = RAGPipeline(
+    retriever,
+    llm
+)
+
 # Ask Question
 question = input("Ask a question: ")
 
-results = retriever.retrieve(
-    question,
-    k=3
-)
+response = rag.ask(question)
+
+print("\n")
+print("=" * 80)
+print("ANSWER")
+print("=" * 80)
+
+print(response["answer"])
 
 
-print("\n" + "=" * 70)
-print("Retrieved Chunks")
-print("=" * 70)
+print("\n")
+print("=" * 80)
+print("SOURCES")
+print("=" * 80)
 
-for i, result in enumerate(results, start=1):
+for source in response["sources"]:
 
-    print(f"\nResult {i}")
-    print(f"Similarity : {result['score']:.4f}")
-    print(f"Source     : {result['filename']}")
-    print(f"Chunk ID   : {result['chunk_id']}")
+    print(f"\n{source['filename']} | Chunk {source['chunk_id']}")
     print("-" * 50)
-    print(result["text"][:400])
+    print(source["text"][:250])
