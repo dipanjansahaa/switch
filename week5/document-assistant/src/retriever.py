@@ -18,7 +18,7 @@ class Retriever:
     def retrieve(
         self,
         query: str,
-        k: int = 3
+        k: int = 5
     ):
         """
         Retrieve the Top-K most relevant chunks.

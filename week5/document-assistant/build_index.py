@@ -17,8 +17,8 @@ def main():
     print("\nChunking...")
 
     chunker = TextChunker(
-        chunk_size=500,
-        overlap=50
+        chunk_size=800,
+        overlap=150
     )
 
     chunks = chunker.create_chunks(documents)
@@ -28,7 +28,7 @@ def main():
 
     print("\nGenerating embeddings...")
 
-    embedder = EmbeddingGenerator()
+    embedder = EmbeddingGenerator(model_name="BAAI/bge-small-en-v1.5")
 
     embeddings = embedder.generate_embeddings(chunks)
 

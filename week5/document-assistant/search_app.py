@@ -48,7 +48,7 @@ def main():
         response = rag.ask(question)
 
 
-        print("\nAssistant:")
+        print("\nAssistant: ", end = "")
         print(response["answer"])
 
 
@@ -57,11 +57,13 @@ def main():
         for source in response["sources"]:
 
             print(
-                f"- {source['filename']} | Chunk {source['chunk_id']}"
+                f"- {source['filename']} | Chunk {source['chunk_id']} | Similarity: {source['score']:.4f}"
             )
 
         print("-" * 60)
 
+        print()
+        print()
 
 if __name__ == "__main__":
     main()
