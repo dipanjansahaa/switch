@@ -1,3 +1,4 @@
+import config
 from sentence_transformers import SentenceTransformer
 import numpy as np
 
@@ -6,7 +7,7 @@ class EmbeddingGenerator:
 
     def __init__(
         self,
-        model_name="BAAI/bge-small-en-v1.5"
+        model_name = config.model_name
     ):
         self.model = SentenceTransformer(model_name)
 

@@ -1,3 +1,4 @@
+import config
 from src.prompt import PromptBuilder
 
 
@@ -16,7 +17,7 @@ class RAGPipeline:
     def ask(
         self,
         question,
-        k=3
+        k = config.k
     ):
 
         retrieved_chunks = self.retriever.retrieve(

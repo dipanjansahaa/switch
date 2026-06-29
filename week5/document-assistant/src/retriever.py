@@ -1,3 +1,4 @@
+import config
 import faiss
 import numpy as np
 
@@ -18,7 +19,7 @@ class Retriever:
     def retrieve(
         self,
         query: str,
-        k: int = 5
+        k
     ):
         """
         Retrieve the Top-K most relevant chunks.
@@ -35,7 +36,7 @@ class Retriever:
 
         scores, indices = self.index.search(
             query_embedding,
-            k
+            config.k
         )
 
         results = []

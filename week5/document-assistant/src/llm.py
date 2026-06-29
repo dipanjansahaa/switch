@@ -1,3 +1,4 @@
+import config
 import ollama
 
 
@@ -5,7 +6,7 @@ class LLM:
 
     def __init__(
         self,
-        model="llama3.2:3b"
+        model = config.model
     ):
         self.model = model
 
