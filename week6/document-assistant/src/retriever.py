@@ -1,5 +1,6 @@
 import faiss
 import numpy as np
+from config import TOP_K
 
 
 class Retriever:
@@ -18,7 +19,7 @@ class Retriever:
     def retrieve(
         self,
         query: str,
-        k: int = 5
+        k = TOP_K
     ):
         """
         Retrieve the Top-K most relevant chunks.

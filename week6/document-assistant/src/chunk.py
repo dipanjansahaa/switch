@@ -1,12 +1,14 @@
 from typing import List
+from config import CHUNK_SIZE
+from config import CHUNK_OVERLAP
 
 
 class TextChunker:
 
     def __init__(
         self,
-        chunk_size: int = 800,
-        overlap: int = 150
+        chunk_size = CHUNK_SIZE,
+        overlap = CHUNK_OVERLAP
     ):
         self.chunk_size = chunk_size
         self.overlap = overlap

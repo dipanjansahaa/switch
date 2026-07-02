@@ -1,7 +1,8 @@
 import faiss
 import pickle
 import numpy as np
-
+from config import INDEX_PATH
+from config import CHUNK_PATH
 
 class VectorIndexer:
 
@@ -29,7 +30,7 @@ class VectorIndexer:
 
     def save_index(
         self,
-        index_path="data/vector_store/faiss.index"
+        index_path = INDEX_PATH
     ):
 
         faiss.write_index(
@@ -40,7 +41,7 @@ class VectorIndexer:
 
     def load_index(
         self,
-        index_path="data/vector_store/faiss.index"
+        index_path = INDEX_PATH
     ):
 
         self.index = faiss.read_index(
@@ -53,7 +54,7 @@ class VectorIndexer:
     def save_chunks(
         self,
         chunks,
-        chunk_path="data/vector_store/chunks.pkl"
+        chunk_path = CHUNK_PATH
     ):
 
         with open(chunk_path, "wb") as file:
@@ -62,7 +63,7 @@ class VectorIndexer:
 
     def load_chunks(
         self,
-        chunk_path="data/vector_store/chunks.pkl"
+        chunk_path = CHUNK_PATH
     ):
 
         with open(chunk_path, "rb") as file:
