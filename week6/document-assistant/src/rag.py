@@ -1,5 +1,5 @@
 from src.prompt import PromptBuilder
-from config import TOP_K
+import config
 
 
 class RAGPipeline:
@@ -17,7 +17,7 @@ class RAGPipeline:
     def ask(
         self,
         question,
-        k = TOP_K
+        k = config.TOP_K
     ):
 
         retrieved_chunks = self.retriever.retrieve(

@@ -1,12 +1,12 @@
 import ollama
-from config import LLM_MODEL
+import config
 
 
 class LLM:
 
     def __init__(
         self,
-        model = LLM_MODEL
+        model = config.LLM_MODEL
     ):
         self.model = model
 

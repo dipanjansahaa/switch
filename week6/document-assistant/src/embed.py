@@ -1,13 +1,13 @@
 from sentence_transformers import SentenceTransformer
 import numpy as np
-from config import EMBEDDING_MODEL
+import config
 
 
 class EmbeddingGenerator:
 
     def __init__(
         self,
-        model_name = EMBEDDING_MODEL
+        model_name = config.EMBEDDING_MODEL
     ):
         self.model = SentenceTransformer(model_name)
 

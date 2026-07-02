@@ -1,14 +1,16 @@
+import json
 from src.ingest import DocumentLoader
 from src.chunk import TextChunker
+from src.chunk import RecursiveChunker
 from src.embed import EmbeddingGenerator
 from src.indexer import VectorIndexer
-
+import config
 
 def main():
 
     print("Loading documents...")
 
-    loader = DocumentLoader("data/docs")
+    loader = DocumentLoader(config.DATA_PATH)
     documents = loader.load_documents()
 
     print(f"Loaded {len(documents)} documents")
@@ -16,19 +18,37 @@ def main():
 
     print("\nChunking...")
 
-    chunker = TextChunker(
-        chunk_size=800,
-        overlap=150
+    # chunker = TextChunker(
+    #     chunk_size = CHUNK_SIZE,
+    #     overlap = CHUNK_OVERLAP
+    # )
+
+    chunker = RecursiveChunker(
+        chunk_size = config.CHUNK_SIZE,
+        overlap = config.CHUNK_OVERLAP
     )
 
     chunks = chunker.create_chunks(documents)
+
+    with open(
+        config.CHUNK_JSON_PATH,
+        "w",
+        encoding="utf-8"
+    ) as f:
+
+        json.dump(
+            chunks,
+            f,
+            indent=2,
+            ensure_ascii=False
+        )
 
     print(f"Created {len(chunks)} chunks")
 
 
     print("\nGenerating embeddings...")
 
-    embedder = EmbeddingGenerator(model_name="BAAI/bge-small-en-v1.5")
+    embedder = EmbeddingGenerator(model_name = config.EMBEDDING_MODEL)
 
     embeddings = embedder.generate_embeddings(chunks)
 

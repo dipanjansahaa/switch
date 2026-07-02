@@ -16,6 +16,8 @@ DATA_PATH = "data/docs"
 
 VECTOR_STORE_PATH = "data/vector_store"
 
+CHUNK_JSON_PATH = f"{VECTOR_STORE_PATH}/chunks.json"
+
 INDEX_PATH = f"{VECTOR_STORE_PATH}/faiss.index"
 
 CHUNK_PATH = f"{VECTOR_STORE_PATH}/chunks.pkl"
