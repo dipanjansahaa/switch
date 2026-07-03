@@ -50,6 +50,7 @@ class Retriever:
                 {
                     "score": float(score),
                     "filename": self.chunks[idx]["filename"],
+                    "page": self.chunks[idx]["page"],
                     "chunk_id": self.chunks[idx]["chunk_id"],
                     "text": self.chunks[idx]["text"]
                 }

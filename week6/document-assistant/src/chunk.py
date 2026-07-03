@@ -42,8 +42,9 @@ class TextChunker:
 
                 all_chunks.append(
                     {
-                        "chunk_id": idx,
                         "filename": document["filename"],
+                        "page": document["page"],
+                        "chunk_id": idx,
                         "text": chunk
                     }
                 )
@@ -91,6 +92,7 @@ class RecursiveChunker:
                 all_chunks.append(
                     {
                         "filename": document["filename"],
+                        "page": document["page"],
                         "chunk_id": idx,
                         "text": chunk
                     }

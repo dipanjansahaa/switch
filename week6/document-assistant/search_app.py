@@ -57,7 +57,7 @@ def main():
         for source in response["sources"]:
 
             print(
-                f"- {source['filename']} | Chunk {source['chunk_id']} | Similarity: {source['score']:.4f}"
+                f"- {source['filename']} | Page {source['page']} | Chunk {source['chunk_id']} | Similarity: {source['score']:.4f}"
             )
 
         print("-" * 60)
