@@ -1,0 +1,68 @@
+[
+    {
+        "question": "What is RAG?",
+        "expected": "RAG stands for Retrieval-Augmented Generation, a technology that combines Large Language Models (LLMs) with additional information sources specific to a certain domain, improving response quality without requiring fine-tuning.",
+        "keywords": ["RAG", "Retrieval-Augmented Generation", "LLM", "retrieval", "generation"],
+        "category": "RAG"
+    },
+    {
+        "question": "How RAG works?",
+        "expected": "Retrieval-Augmented Generation (RAG) is an AI technique that extends a Large Language Model's knowledge by pulling specific facts from external, up-to-date, or private data sources before it generates an answer.",
+        "keywords": ["retrieval", "generation", "LLM", "external", "documents"],
+        "category": "RAG"
+    },
+    {
+        "question": "What is LangChain?",
+        "expected": "LangChain is a library and framework for developing applications around Large Language Models (LLMs). It provides various modules for enabling RAG pipelines, including document loaders, text splitters, and more.",
+        "keywords": ["LangChain", "framework", "LLM", "applications", "RAG"],
+        "category": "LangChain"
+    },
+    {
+        "question": "What is an embedding?",
+        "expected": "An embedding is a high-dimensional numerical vector that represents the semantic meaning of a piece of text, such as a document or a query.",
+        "keywords": ["embedding", "vector", "semantic", "text"],
+        "category": "Embeddings"
+    },
+    {
+        "question": "How embedding works?",
+        "expected": "Embedding involves transforming raw unstructured data into high-dimensional numerical vectors using an embedding model. The process typically includes text chunking, passing the chunks through the embedding model to extract numerical vectors, and storing these vectors alongside original text metadata in a database or vector store.",
+        "keywords": ["embedding", "vectors", "chunk", "model", "vector store"],
+        "category": "Embeddings"
+    },
+    {
+        "question": "Why are documents chunked?",
+        "expected": "Documents are chunked to capture more context but also generate more noise. This means that larger chunks can provide more information, but they may also include redundant or distracting content that could negatively impact retrieval and downstream tasks. Smaller chunks, on the other hand, have less noise but may not fully convey the necessary context.",
+        "keywords": ["chunk", "context", "retrieval", "LLM", "documents"],
+        "category": "Chunking"
+    },
+    {
+        "question": "What is FAISS?",
+        "expected": "FAISS (Facebook AI Similarity Search) is an approximate nearest neighbor vector search algorithm that makes it very efficient to find the k most similar document embeddings to a query embedding, making it quick to do ranking.",
+        "keywords": ["FAISS", "vector", "similarity", "nearest", "search"],
+        "category": "Vector Database"
+    },
+    {
+        "question": "what is SAP?",
+        "expected": "SAP (Systems, Applications, and Products in Data Processing) is an enterprise software platform used by organizations to manage and integrate core business processes such as finance, human resources, procurement, manufacturing, supply chain, and sales within a single centralized system.",
+        "keywords": ["SAP", "enterprise", "business", "software"],
+        "category": "SAP"
+    },
+    {
+        "question": "what is ABAP?",
+        "expected": "ABAP (Advanced Business Application Programming) is a high-level programming language developed by SAP SE for building and customizing applications within the SAP ecosystem.",
+        "keywords": ["ABAP", "SAP", "programming", "language"],
+        "category": "SAP"
+    },
+    {
+        "question": "What is BAPI in SAP?",
+        "expected": "BAPI (Business Application Programming Interface) is a standardized programming interface provided by SAP SE that allows external systems or custom applications to interact with SAP business objects safely and consistently.",
+        "keywords": ["BAPI", "business", "programming", "interface", "SAP"],
+        "category": "SAP"
+    },
+    {
+        "question": "What is ALV in SAP?",
+        "expected": "ALV (ABAP List Viewer) is a standard SAP tool used to display structured and interactive reports in a tabular format, providing built-in features such as sorting, filtering, column reordering, totals, subtotals, exporting to Excel, and layout customization.",
+        "keywords": ["ALV", "ABAP", "report", "viewer"],
+        "category": "SAP"
+    }
+]
