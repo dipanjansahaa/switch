@@ -8,8 +8,20 @@ LLM_MODEL = "llama3.2:3b"
 CHUNK_SIZE = 800
 CHUNK_OVERLAP = 150
 
-# Retrieval
+# Retrieval Strategy
+# RETRIEVAL_TYPE = "similarity"
+# RETRIEVAL_TYPE = "threshold"
+# RETRIEVAL_TYPE = "mmr"
+RETRIEVAL_TYPE = "custom"
+
+# Options:
+# "similarity"
+# "threshold"
+# "mmr"
+
 TOP_K = 5
+
+SCORE_THRESHOLD = 0.70
 
 # Paths
 DATA_PATH = "data/docs"

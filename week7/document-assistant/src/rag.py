@@ -17,12 +17,14 @@ class RAGPipeline:
     def ask(
         self,
         question,
-        k = config.TOP_K
+        # k = config.TOP_K
     ):
 
         retrieved_chunks = self.retriever.retrieve(
-            question,
-            k
+            query=question,
+            strategy=config.RETRIEVAL_TYPE,
+            k=config.TOP_K,
+            threshold=config.SCORE_THRESHOLD
         )
 
         prompt = PromptBuilder.build_prompt(

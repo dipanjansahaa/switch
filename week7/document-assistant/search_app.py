@@ -56,14 +56,14 @@ def main():
 
         for source in response["sources"]:
 
-            # print(
-            #     f"- {source['filename']} | Page {source['page']} | Chunk {source['chunk_id']} | Similarity: {source['score']:.4f}"
-            # )
+            print(
+                f"- {source['filename']} | Page {source['page']} | Chunk {source['chunk_id']} | Similarity: {source['score']:.4f}"
+            )
 
-            if source['score'] >= 0.75:
-                print(
-                    f"- {source['filename']} | Page {source['page']} | Chunk {source['chunk_id']} | Similarity: {source['score']:.4f}"
-                )
+            # if source['score'] >= 0.75:
+            #     print(
+            #         f"- {source['filename']} | Page {source['page']} | Chunk {source['chunk_id']} | Similarity: {source['score']:.4f}"
+            #     )
 
         print("-" * 60)
 
