@@ -1,2 +1,0 @@
-Retrieval-Augmented Generation combines retrieval
-with large language models.
