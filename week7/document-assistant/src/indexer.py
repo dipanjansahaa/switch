@@ -2,6 +2,7 @@ import faiss
 import pickle
 import numpy as np
 import config
+from rank_bm25 import BM25Okapi
 
 class VectorIndexer:
 
@@ -69,3 +70,36 @@ class VectorIndexer:
             chunks = pickle.load(file)
 
         return chunks
+
+
+    def create_bm25(self, chunks):
+
+        tokenized_corpus = [
+            chunk["text"].lower().split()
+            for chunk in chunks
+        ]
+
+        self.bm25 = BM25Okapi(tokenized_corpus)
+
+        return self.bm25
+
+
+    def save_bm25(
+        self,
+        path="data/vector_store/bm25.pkl"
+    ):
+
+        with open(path, "wb") as f:
+            pickle.dump(self.bm25, f)
+
+
+    def load_bm25(
+        self,
+        path="data/vector_store/bm25.pkl"
+    ):
+
+        with open(path, "rb") as f:
+
+            self.bm25 = pickle.load(f)
+
+        return self.bm25

@@ -15,13 +15,16 @@ def main():
 
     chunks = indexer.load_chunks()
 
+    bm25 = indexer.load_bm25()
+
 
     embedder = EmbeddingGenerator()
 
     retriever = Retriever(
         index=index,
         chunks=chunks,
-        embedder=embedder
+        embedder=embedder,
+        bm25=bm25
     )
 
 

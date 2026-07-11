@@ -9,13 +9,15 @@ CHUNK_SIZE = 800
 CHUNK_OVERLAP = 150
 
 # Retrieval Strategy
-# RETRIEVAL_TYPE = "similarity"
-RETRIEVAL_TYPE = "threshold"
+RETRIEVAL_TYPE = "similarity"
+# RETRIEVAL_TYPE = "threshold"
+# RETRIEVAL_TYPE = "hybrid"
 # RETRIEVAL_TYPE = "custom"
 
 # Options:
 # "similarity"
 # "threshold"
+# "hybrid"
 # "mmr"
 
 TOP_K = 5

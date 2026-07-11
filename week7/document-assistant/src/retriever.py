@@ -9,11 +9,13 @@ class Retriever:
         self,
         index,
         chunks,
-        embedder
+        embedder,
+        bm25=None
     ):
         self.index = index
         self.chunks = chunks
         self.embedder = embedder
+        self.bm25 = bm25
 
 
     def retrieve(
@@ -32,6 +34,13 @@ class Retriever:
                 query,
                 k,
                 threshold
+            )
+
+        elif strategy == "hybrid":
+
+            return self.hybrid_search(
+                query,
+                k
             )
 
         else:
@@ -128,3 +137,50 @@ class Retriever:
             )
 
         return results
+
+    def hybrid_search(
+        self,
+        query: str,
+        k=config.TOP_K
+    ):
+        faiss_results = self.similarity_search(
+            query,
+            k
+        )
+
+        tokens = query.lower().split()
+
+        scores = self.bm25.get_scores(tokens)
+
+        top_idx = sorted(
+            range(len(scores)),
+            key=lambda i: scores[i],
+            reverse=True
+        )[:k]
+
+        bm25_results = []
+
+        for idx in top_idx:
+
+            bm25_results.append(
+                {
+                    "score": float(scores[idx]),
+                    "filename": self.chunks[idx]["filename"],
+                    "page": self.chunks[idx]["page"],
+                    "chunk_id": self.chunks[idx]["chunk_id"],
+                    "text": self.chunks[idx]["text"]
+                }
+            )
+
+        merged = {}
+
+        for result in faiss_results + bm25_results:
+
+            key = (
+                result["filename"],
+                result["chunk_id"]
+            )
+
+            merged[key] = result
+
+        return list(merged.values())[:k]

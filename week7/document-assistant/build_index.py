@@ -59,9 +59,13 @@ def main():
 
     indexer.create_index(embeddings)
 
+    indexer.create_bm25(chunks)
+
     indexer.save_index()
 
     indexer.save_chunks(chunks)
+
+    indexer.save_bm25()
 
 
     print("\nDone!")
