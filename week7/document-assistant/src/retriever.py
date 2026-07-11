@@ -1,7 +1,7 @@
 import faiss
 import numpy as np
 import config
-
+from src.embed import Reranker
 
 class Retriever:
 
@@ -17,6 +17,11 @@ class Retriever:
         self.embedder = embedder
         self.bm25 = bm25
 
+        if config.RETRIEVAL_TYPE == "reranker":
+            self.reranker = Reranker()
+        else:
+            self.reranker = None
+
 
     def retrieve(
         self,
@@ -27,7 +32,9 @@ class Retriever:
     ):
 
         if strategy == "similarity":
-            return self.similarity_search(query, k)
+            return self.similarity_search(
+                query, k
+            )
 
         elif strategy == "threshold":
             return self.threshold_search(
@@ -37,8 +44,13 @@ class Retriever:
             )
 
         elif strategy == "hybrid":
-
             return self.hybrid_search(
+                query,
+                k
+            )
+
+        elif strategy=="reranker":
+            return self.rerank_search(
                 query,
                 k
             )
@@ -138,6 +150,7 @@ class Retriever:
 
         return results
 
+
     def hybrid_search(
         self,
         query: str,
@@ -184,3 +197,22 @@ class Retriever:
             merged[key] = result
 
         return list(merged.values())[:k]
+
+
+    def rerank_search(
+        self,
+        query: str,
+        k=config.TOP_K
+    ):
+
+        results = self.similarity_search(
+            query,
+            k*2
+        )
+
+        results = self.reranker.rerank(
+            query,
+            results
+        )
+
+        return results[:k]

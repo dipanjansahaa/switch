@@ -1,4 +1,5 @@
 from sentence_transformers import SentenceTransformer
+from sentence_transformers import CrossEncoder
 import numpy as np
 import config
 
@@ -44,3 +45,42 @@ class EmbeddingGenerator:
         )
 
         return embedding
+
+
+class Reranker:
+
+    def __init__(
+        self,
+        model_name = config.RERANKER_MODEL
+
+    ):
+
+        self.model = CrossEncoder(model_name)
+
+    def rerank(
+        self,
+        query,
+        retrieved_chunks
+    ):
+        pairs = [
+            (query, chunk["text"])
+            for chunk in retrieved_chunks
+        ]
+
+        scores = self.model.predict(
+            pairs
+        )
+
+        for score, chunk in zip(
+            scores,
+            retrieved_chunks
+        ):
+
+            chunk["rerank_score"] = float(score)
+
+        retrieved_chunks.sort(
+            key=lambda x: x["rerank_score"],
+            reverse=True
+        )
+
+        return retrieved_chunks

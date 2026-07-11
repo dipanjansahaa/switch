@@ -1,6 +1,9 @@
 # Embedding Model
 EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
 
+# Reranker Model
+RERANKER_MODEL = "BAAI/bge-reranker-base"
+
 # LLM
 LLM_MODEL = "llama3.2:3b"
 
@@ -9,15 +12,16 @@ CHUNK_SIZE = 800
 CHUNK_OVERLAP = 150
 
 # Retrieval Strategy
-RETRIEVAL_TYPE = "similarity"
+# RETRIEVAL_TYPE = "similarity"
 # RETRIEVAL_TYPE = "threshold"
 # RETRIEVAL_TYPE = "hybrid"
-# RETRIEVAL_TYPE = "custom"
+RETRIEVAL_TYPE = "reranker"
 
 # Options:
 # "similarity"
 # "threshold"
 # "hybrid"
+# "reranker"
 # "mmr"
 
 TOP_K = 5
