@@ -3,6 +3,8 @@ from src.indexer import VectorIndexer
 from src.retriever import Retriever
 from src.llm import LLM
 from src.rag import RAGPipeline
+from src.query_expander import QueryExpander
+import config
 
 
 def main():
@@ -30,9 +32,16 @@ def main():
 
     llm = LLM()
 
+    if config.ENABLE_QUERY_EXPANSION:
+        query_expander = QueryExpander(llm)
+    else:
+        query_expander = None
+
+
     rag = RAGPipeline(
         retriever,
-        llm
+        llm,
+        query_expander
     )
 
 

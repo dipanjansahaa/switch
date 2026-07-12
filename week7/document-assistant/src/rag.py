@@ -7,11 +7,13 @@ class RAGPipeline:
     def __init__(
         self,
         retriever,
-        llm
+        llm,
+        query_expander=None
     ):
 
         self.retriever = retriever
         self.llm = llm
+        self.query_expander = query_expander
 
 
     def ask(
@@ -20,8 +22,15 @@ class RAGPipeline:
         # k = config.TOP_K
     ):
 
+        if self.query_expander:
+            expanded_query = self.query_expander.expand(question)
+        else:
+            expanded_query = question
+
+        print("Expanded Query:", expanded_query)
+
         retrieved_chunks = self.retriever.retrieve(
-            query=question,
+            query=expanded_query,
             strategy=config.RETRIEVAL_TYPE,
             k=config.TOP_K,
             threshold=config.SCORE_THRESHOLD

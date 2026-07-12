@@ -13,9 +13,9 @@ CHUNK_OVERLAP = 150
 
 # Retrieval Strategy
 # RETRIEVAL_TYPE = "similarity"
-# RETRIEVAL_TYPE = "threshold"
+RETRIEVAL_TYPE = "threshold"
 # RETRIEVAL_TYPE = "hybrid"
-RETRIEVAL_TYPE = "reranker"
+# RETRIEVAL_TYPE = "reranker"
 
 # Options:
 # "similarity"
@@ -38,3 +38,6 @@ CHUNK_JSON_PATH = f"{VECTOR_STORE_PATH}/chunks.json"
 INDEX_PATH = f"{VECTOR_STORE_PATH}/faiss.index"
 
 CHUNK_PATH = f"{VECTOR_STORE_PATH}/chunks.pkl"
+
+# Query Expansion
+ENABLE_QUERY_EXPANSION = True
