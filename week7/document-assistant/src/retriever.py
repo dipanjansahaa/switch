@@ -97,6 +97,8 @@ class Retriever:
                     "filename": self.chunks[idx]["filename"],
                     "page": self.chunks[idx]["page"],
                     "chunk_id": self.chunks[idx]["chunk_id"],
+                    "parent_id": self.chunks[idx]["parent_id"],
+                    "parent_content": self.chunks[idx]["parent_content"],
                     "text": self.chunks[idx]["text"]
                 }
             )
@@ -144,6 +146,8 @@ class Retriever:
                     "filename": self.chunks[idx]["filename"],
                     "page": self.chunks[idx]["page"],
                     "chunk_id": self.chunks[idx]["chunk_id"],
+                    "parent_id": self.chunks[idx]["parent_id"],
+                    "parent_content": self.chunks[idx]["parent_content"],
                     "text": self.chunks[idx]["text"]
                 }
             )
@@ -181,6 +185,8 @@ class Retriever:
                     "filename": self.chunks[idx]["filename"],
                     "page": self.chunks[idx]["page"],
                     "chunk_id": self.chunks[idx]["chunk_id"],
+                    "parent_id": self.chunks[idx]["parent_id"],
+                    "parent_content": self.chunks[idx]["parent_text"],
                     "text": self.chunks[idx]["text"]
                 }
             )

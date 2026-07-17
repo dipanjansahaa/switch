@@ -41,3 +41,6 @@ CHUNK_PATH = f"{VECTOR_STORE_PATH}/chunks.pkl"
 
 # Query Expansion
 ENABLE_QUERY_EXPANSION = True
+
+# Parent Document Retriever
+USE_PARENT_CONTEXT = True

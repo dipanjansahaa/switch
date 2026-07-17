@@ -1,6 +1,6 @@
 import json
 from src.ingest import DocumentLoader
-from src.chunk import TextChunker
+# from src.chunk import TextChunker
 from src.chunk import RecursiveChunker
 from src.embed import EmbeddingGenerator
 from src.indexer import VectorIndexer
