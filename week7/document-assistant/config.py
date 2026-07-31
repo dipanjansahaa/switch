@@ -13,10 +13,10 @@ CHUNK_OVERLAP = 150
 
 # Retrieval Strategy
 # RETRIEVAL_TYPE = "similarity"
-# RETRIEVAL_TYPE = "threshold"
+RETRIEVAL_TYPE = "threshold"
 # RETRIEVAL_TYPE = "hybrid"
 # RETRIEVAL_TYPE = "reranker"
-RETRIEVAL_TYPE = "multi_query"
+# RETRIEVAL_TYPE = "multi_query"
 
 # Options:
 # "similarity"
@@ -41,7 +41,10 @@ INDEX_PATH = f"{VECTOR_STORE_PATH}/faiss.index"
 CHUNK_PATH = f"{VECTOR_STORE_PATH}/chunks.pkl"
 
 # Query Expansion
-ENABLE_QUERY_EXPANSION = True
+ENABLE_QUERY_EXPANSION = False
 
 # Parent Document Retriever
 USE_PARENT_CONTEXT = True
+
+# Multi Query
+ENABLE_MULTI_QUERY = True

@@ -13,7 +13,11 @@ class PromptBuilder:
 
         for chunk in context_chunks:
 
-            if config.USE_PARENT_CONTEXT:
+            if (
+                config.USE_PARENT_CONTEXT
+                and "parent_id" in chunk
+                and "parent_content" in chunk
+            ):
 
                 parent = (
                     chunk["filename"],
@@ -29,26 +33,29 @@ class PromptBuilder:
 
         for chunk in unique_chunks:
 
-            if config.USE_PARENT_CONTEXT:
+            context += (
+                f"Source: {chunk['filename']} "
+                f"(Page {chunk['page']})\n\n"
+            )
+
+            if (
+                config.USE_PARENT_CONTEXT
+                and "parent_content" in chunk
+            ):
 
                 context += (
-                    f"Source: {chunk['filename']} "
-                    f"(Page {chunk['page']})\n\n"
                     f"{chunk['parent_content']}\n\n"
-                    "----------------------------------\n\n"
                 )
 
             else:
 
                 context += (
-                    f"Source: {chunk['filename']} "
-                    f"(Page {chunk['page']})\n\n"
                     f"{chunk['text']}\n\n"
-                    "----------------------------------\n\n"
                 )
 
-        prompt = f"""
-You are a helpful AI assistant.
+            context += "----------------------------------\n\n"
+
+        prompt = f"""You are a helpful AI assistant.
 
 Answer ONLY using the provided context.
 

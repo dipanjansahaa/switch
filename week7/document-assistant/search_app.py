@@ -4,6 +4,8 @@ from src.retriever import Retriever
 from src.llm import LLM
 from src.rag import RAGPipeline
 from src.query_expander import QueryExpander
+from src.vectorstore import VectorStoreBuilder
+from src.multi_query import MultiQuerySearch
 import config
 
 
@@ -16,6 +18,10 @@ def main():
     index = indexer.load_index()
 
     chunks = indexer.load_chunks()
+
+    builder = VectorStoreBuilder()
+
+    vectorstore = builder.build(chunks)
 
     bm25 = indexer.load_bm25()
 
@@ -72,9 +78,26 @@ def main():
 
         for source in response["sources"]:
 
-            print(
-                f"- {source['filename']} | Page {source['page']} | Chunk {source['chunk_id']} | Similarity: {source['score']:.4f}"
-            )
+            if "score" in source:
+
+                print(
+                    f"- {source['filename']} | "
+                    f"Page {source['page']} | "
+                    f"Chunk {source['chunk_id']} | "
+                    f"Similarity: {source['score']:.4f}"
+                )
+
+            else:
+
+                print(
+                    f"- {source['filename']} | "
+                    f"Page {source['page']} | "
+                    f"Chunk {source['chunk_id']}"
+                )
+
+            # print(
+            #     f"- {source['filename']} | Page {source['page']} | Chunk {source['chunk_id']} | Similarity: {source['score']:.4f}"
+            # )
 
             # if source['score'] >= 0.75:
             #     print(

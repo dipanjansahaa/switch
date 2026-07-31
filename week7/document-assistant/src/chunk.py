@@ -45,8 +45,10 @@ class TextChunker:
                         "filename": document["filename"],
                         "page": document["page"],
                         "chunk_id": idx,
-                        "parent_id": document["parent_id"],
-                        "parent_content": document["parent_content"],
+                        # "parent_id": document["parent_id"],
+                        # "parent_content": document["parent_content"],
+                        "parent_id": document["page"],
+                        "parent_content": document["content"],
                         "text": chunk
                     }
                 )
@@ -96,8 +98,10 @@ class RecursiveChunker:
                         "filename": document["filename"],
                         "page": document["page"],
                         "chunk_id": idx,
-                        "parent_id": document["parent_id"],
-                        "parent_content": document["parent_content"],
+                        # "parent_id": document["parent_id"],
+                        # "parent_content": document["parent_content"],
+                        "parent_id": document["page"],
+                        "parent_content": document["content"],
                         "text": chunk
                     }
                 )

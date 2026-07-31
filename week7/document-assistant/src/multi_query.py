@@ -1,4 +1,5 @@
-from langchain.retrievers.multi_query import MultiQueryRetriever
+# from langchain.retrievers.multi_query import MultiQueryRetriever
+from langchain_classic.retrievers.multi_query import MultiQueryRetriever
 from langchain_ollama import ChatOllama
 import config
 
@@ -17,8 +18,24 @@ class MultiQuerySearch:
                 search_kwargs={"k": 5}
             ),
             llm=self.llm
+            # verbose=True
         )
 
     def retrieve(self, query):
 
-        return self.retriever.invoke(query)
+        docs = self.retriever.invoke(query)
+
+        results = []
+
+        for doc in docs:
+
+            results.append(
+                {
+                    "filename": doc.metadata["filename"],
+                    "page": doc.metadata["page"],
+                    "chunk_id": doc.metadata["chunk_id"],
+                    "text": doc.page_content
+                }
+            )
+
+        return results

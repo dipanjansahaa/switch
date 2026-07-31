@@ -8,13 +8,14 @@ class RAGPipeline:
         self,
         retriever,
         llm,
-        query_expander=None
+        query_expander=None,
+        multi_query=None
     ):
 
         self.retriever = retriever
         self.llm = llm
         self.query_expander = query_expander
-
+        self.multi_query = multi_query
 
     def ask(
         self,
