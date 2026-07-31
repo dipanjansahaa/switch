@@ -37,11 +37,15 @@ def main():
     else:
         query_expander = None
 
+    multi_query = MultiQuerySearch(
+        vectorstore
+    )
 
     rag = RAGPipeline(
         retriever,
         llm,
-        query_expander
+        query_expander,
+        multi_query=multi_query
     )
 
 

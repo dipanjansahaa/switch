@@ -29,12 +29,21 @@ class RAGPipeline:
 
         print("Expanded Query:", expanded_query)
 
-        retrieved_chunks = self.retriever.retrieve(
-            query=expanded_query,
-            strategy=config.RETRIEVAL_TYPE,
-            k=config.TOP_K,
-            threshold=config.SCORE_THRESHOLD
-        )
+
+        if config.RETRIEVAL_TYPE == "multi_query":
+
+            retrieved_chunks = self.multi_query.retrieve(
+                question
+            )
+
+        else:
+
+            retrieved_chunks = self.retriever.retrieve(
+                query=expanded_query,
+                strategy=config.RETRIEVAL_TYPE,
+                k=config.TOP_K,
+                threshold=config.SCORE_THRESHOLD
+            )
 
         prompt = PromptBuilder.build_prompt(
             retrieved_chunks,
