@@ -411,6 +411,98 @@ When enabled, the prompt is built using the parent document instead of individua
 
 ---
 
+# 8. Configurable Prompt Context
+
+---
+
+# 9. Multi-Query Retrieval
+
+Traditional retrieval performs a search using only a single user query.
+
+Example:
+
+```
+What is RAG?
+```
+
+Although effective, a single query may not retrieve all relevant information if the documents describe the same concept using different wording.
+
+Multi-Query Retrieval improves retrieval by generating multiple semantically different versions of the user's question before performing the search.
+
+Pipeline:
+
+```
+User Question
+
+↓
+
+LLM
+
+↓
+
+Generate Multiple Queries
+
+↓
+
+Retriever
+
+↓
+
+Merge Retrieved Documents
+
+↓
+
+Remove Duplicate Documents
+
+↓
+
+LLM
+```
+
+Example:
+
+Original Query
+
+```
+What is RAG?
+```
+
+Generated Queries
+
+```
+What is Retrieval-Augmented Generation?
+
+Explain the RAG pipeline.
+
+How does Retrieval-Augmented Generation work?
+
+Describe the components of a RAG system.
+```
+
+Each generated query performs its own retrieval.
+
+The retrieved documents are then merged, duplicate documents are removed, and the final context is passed to the LLM.
+
+Benefits:
+
+- Improves document recall
+- Handles different terminology and synonyms
+- Retrieves information from multiple sections of the documents
+- Produces richer context for answer generation
+- Increases the chances of finding relevant information when the user's original query is short or ambiguous
+
+Current Implementation:
+
+The project integrates LangChain's `MultiQueryRetriever` while preserving the existing custom RAG pipeline. Retrieved LangChain `Document` objects are converted into the project's internal document format before prompt generation, allowing the feature to work alongside the existing retrieval, prompt-building, and answer-generation modules.
+
+Limitations:
+
+- MultiQueryRetriever does not expose similarity scores for the retrieved documents.
+- It returns LangChain `Document` objects, requiring conversion before integrating with the custom pipeline.
+- It is designed to work with LangChain VectorStores and Retrievers, making integration with a fully custom RAG architecture more complex than other retrieval strategies.
+
+---
+
 # Overall Retrieval Pipeline
 
 ```
@@ -478,5 +570,6 @@ After completing Week 7, the RAG system supports:
 - Parent Document Retrieval
 - Parent context deduplication
 - Configurable prompt context
+- Multi-Query Retrieval
 
 These enhancements significantly improve retrieval quality, reduce redundant information, provide richer context to the LLM, and make the RAG pipeline more modular and closer to production-ready systems.
