@@ -60,7 +60,6 @@ def chat(model, temperature, content):
     print(response.usage_metadata)
     print()
 
-
 chat(
     model = "llama3.2:3b",
     temperature = 0,
@@ -148,3 +147,19 @@ chat(
     sentences = 4
 )
 ```
+
+
+03_chat_prompt
+04_lcel
+05_runnables
+06_structured_output
+07_output_parser
+08_streaming
+09_memory
+10_embeddings
+11_vector_store
+12_retriever
+13_simple_rag
+14_tools
+15_tool_calling
+16_agent
