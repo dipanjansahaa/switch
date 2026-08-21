@@ -149,7 +149,105 @@ chat(
 ```
 
 
-03_chat_prompt
+# 03 — Chat Prompt Template
+
+A small LangChain experiment to understand how to build structured chat prompts using system, human, and AI messages with dynamic input variables.
+
+## Concepts Covered
+
+- `ChatPromptTemplate`
+- System messages
+- Human messages
+- AI messages
+- `MessagesPlaceholder`
+- Message roles
+- Dynamic prompt variables
+- `prompt.invoke()`
+- Structured chat prompts
+- `ChatOllama`
+- `model.invoke()`
+
+## Flow
+
+```text
+Topic
+Audience
+    ↓
+ChatPromptTemplate
+    ├── System Message
+    ├── Human Message
+    └── AI Message
+    ↓
+prompt.invoke()
+    ↓
+Structured Messages
+    ↓
+ChatOllama
+    ↓
+model.invoke()
+    ↓
+AIMessage
+    ↓
+Response Content
+```
+
+## Code
+
+```python
+from langchain_ollama import ChatOllama
+from langchain_core.prompts import ChatPromptTemplate
+
+
+def generate_explanation(
+    model_name,
+    temperature,
+    topic,
+    audience
+):
+    model = ChatOllama(
+        model = model_name,
+        temperature = temperature
+    )
+
+    prompt = ChatPromptTemplate.from_messages([
+        (
+            "system",
+            "You are an expert technical instructor. "
+            "Explain concepts clearly and accurately."
+        ),
+        (
+            "human",
+            "Explain {topic} to a {audience} audience."
+        ),
+        (
+            "ai",
+            "Sure. I'll explain it clearly."
+        ),
+        (
+            "human",
+            "Now give me a simple example."
+        )
+    ])
+
+    messages = prompt.invoke({
+        "topic": topic,
+        "audience": audience
+    })
+
+    response = model.invoke(messages)
+
+    print(response.content)
+
+generate_explanation(
+    model_name = "llama3.2:3b",
+    temperature = 0,
+    topic = "LangChain",
+    audience = "beginner"
+)
+```
+
+
+## rest
 04_lcel
 05_runnables
 06_structured_output
