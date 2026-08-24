@@ -247,8 +247,44 @@ generate_explanation(
 ```
 
 
-## rest
-04_lcel
+# 04 — LangChain Expression Language (LCEL)
+
+A small LangChain experiment to understand how LangChain components can be composed into executable pipelines using LangChain Expression Language (LCEL).
+
+## Concepts Covered
+
+- LangChain Expression Language (LCEL)
+- Runnable composition
+- Pipe (`|`) operator
+- `ChatPromptTemplate`
+- `ChatOllama`
+- `StrOutputParser`
+- `chain.invoke()`
+- Sequential processing
+- Connecting component inputs and outputs
+
+## Flow
+
+```text
+Input
+    ↓
+ChatPromptTemplate
+    ↓
+ChatOllama
+    ↓
+StrOutputParser
+    ↓
+String Output
+```
+
+## Code
+
+```python
+
+```
+
+
+# rest
 05_runnables
 06_structured_output
 07_output_parser
