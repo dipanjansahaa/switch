@@ -280,12 +280,65 @@ String Output
 ## Code
 
 ```python
+# lcel base
+from langchain_ollama import ChatOllama
+from langchain_core.prompts import ChatPromptTemplate
 
+
+def generate_explanation(
+    model_name,
+    temperature,
+    topic,
+    audience
+):
+    model = ChatOllama(
+        model = model_name,
+        temperature = temperature
+    )
+
+    prompt = ChatPromptTemplate.from_messages([
+        (
+            "system",
+            "You are an expert technical instructor. "
+            "Explain concepts clearly and accurately."
+        ),
+        (
+            "human",
+            "Explain {topic} to a {audience} audience."
+        ),
+        (
+            "ai",
+            "Sure. I'll explain it clearly."
+        ),
+        (
+            "human",
+            "Now give me a simple example."
+        )
+    ])
+
+    chain = prompt | model
+
+    response = chain.invoke({
+        "topic": topic,
+        "audience": audience
+    })
+
+    print(response.content)
+
+
+generate_explanation(
+    model_name = "llama3.2:3b",
+    temperature = 0,
+    topic = "LangChain",
+    audience = "beginner"
+)
 ```
 
 
+# 05 — Runnables
+
+
 # rest
-05_runnables
 06_structured_output
 07_output_parser
 08_streaming
