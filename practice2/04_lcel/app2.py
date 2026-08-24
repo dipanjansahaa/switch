@@ -1,6 +1,7 @@
-# lcel base
+# lcel updated
 from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 
 
 def generate_explanation(
@@ -24,32 +25,30 @@ def generate_explanation(
             "human",
             "Explain {topic} to a {audience} audience."
         ),
-        (
-            "ai",
-            "Sure. I'll explain it clearly."
-        ),
-        (
-            "human",
-            "Now give me a simple example."
-        )
+        # (
+        #     "ai",
+        #     "Sure. I'll explain it clearly."
+        # ),
+        # (
+        #     "human",
+        #     "Now give me a simple example."
+        # )
     ])
 
-    chain = prompt | model
-
-    # LCEL lets you compose LangChain components into executable pipelines.
+    chain = prompt | model | StrOutputParser()
 
     response = chain.invoke({
         "topic": topic,
         "audience": audience
     })
 
-    print(response.content)
+    print(response)
 
 
 generate_explanation(
     model_name = "llama3.2:3b",
     temperature = 0,
-    # topic = "LangChain Expression Language",
-    topic = "LangChain",
+    topic = "LangChain Expression Language",
+    # topic = "LangChain",
     audience = "beginner"
 )
