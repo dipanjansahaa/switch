@@ -337,6 +337,117 @@ generate_explanation(
 
 # 05 — Runnables
 
+A small LangChain experiment to understand the Runnable abstraction and how LangChain components can be composed sequentially, in parallel, or combined with custom Python logic.
+
+## Concepts Covered
+
+- `Runnable`
+- `RunnableSequence`
+- `RunnableParallel`
+- `RunnablePassthrough`
+- `RunnableLambda`
+- `invoke()`
+- Sequential composition
+- Parallel execution
+- Passing data through a chain
+- Converting Python functions into Runnables
+- LCEL composition
+
+## Flow
+
+```text
+                    ┌── RunnableLambda ──→ Context
+Input ──────────────┤
+                    └── RunnablePassthrough ──→ Question
+                              ↓
+                    RunnableParallel
+                              ↓
+                           Prompt
+                              ↓
+                            Model
+                              ↓
+                           Parser
+                              ↓
+                           Output
+```
+
+## Code
+
+```python
+from langchain_ollama import ChatOllama
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import (
+    RunnableParallel,
+    RunnablePassthrough,
+    RunnableLambda,
+)
+
+
+def count_words(text: str) -> int:
+    return len(text.split())
+
+
+def create_chain(model_name, temperature):
+
+    model = ChatOllama(
+        model = model_name,
+        temperature = temperature
+    )
+
+    prompt = ChatPromptTemplate.from_template(
+        """
+        Answer the question using the following context.
+
+        Context:
+        {context}
+
+        Question:
+        {question}
+        """
+    )
+
+    fake_retriever = RunnableLambda(
+        lambda question: (
+            "RAG stands for Retrieval-Augmented Generation. "
+            "It retrieves relevant information before generating an answer. "
+            "We use RAG to build LLMs. "
+        )
+    )
+
+    word_count = RunnableLambda(count_words)
+
+    chain = (
+        RunnableParallel(
+            context = fake_retriever,
+            question = RunnablePassthrough(),
+            word_count = word_count
+        )
+        | prompt
+        | model
+        | StrOutputParser()
+    )
+
+    return chain
+
+
+def main():
+    chain = create_chain(
+        model_name = "llama3.2:3b",
+        temperature = 0
+    )
+
+    response = chain.invoke(
+        "What is RAG?"
+    )
+
+    print(response)
+
+
+if __name__ == "__main__":
+    main()
+```
+
 
 # rest
 06_structured_output
