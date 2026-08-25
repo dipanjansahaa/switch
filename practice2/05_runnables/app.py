@@ -1,7 +1,9 @@
+# runnables base
 from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import Runnable
+from langchain_core.runnables import RunnableSequence
 
 
 def main():
@@ -23,9 +25,27 @@ def main():
 
     parser = StrOutputParser()
 
-    print("Prompt is Runnable:", isinstance(prompt, Runnable))
-    print("Model is Runnable:", isinstance(model, Runnable))
-    print("Parser is Runnable:", isinstance(parser, Runnable))
+    # print("Prompt is Runnable:", isinstance(prompt, Runnable))
+    # print("Model is Runnable:", isinstance(model, Runnable))
+    # print("Parser is Runnable:", isinstance(parser, Runnable))
+
+    chain_1 = prompt | model | parser
+
+    chain_2 = RunnableSequence(
+        prompt,
+        model,
+        parser
+    )
+
+    inputs = {
+        "topic": "Runnables in LangChain"
+    }
+
+    print(chain_1.invoke(inputs))
+    print()
+
+    print(chain_2.invoke(inputs))
+    print()
 
 
 if __name__ == "__main__":
